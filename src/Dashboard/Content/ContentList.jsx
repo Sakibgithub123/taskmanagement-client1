@@ -20,38 +20,31 @@ const ContentList = ({ title, tasks, addTask }) => {
   // };
 
   // delete task
-  const handleDelete = (_id) => {
+  const handleDelete=(_id)=>{
     Swal.fire({
       title: "Are you sure?",
-      text: "You won't be able to revert this!",
+      text: "You want to delete this this!",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, delete it!"
-    }).then((result) => {
+  }).then(async (result) => {
       if (result.isConfirmed) {
-        const { data: tasks = [], refetch } = useQuery({
-          queryKey: ['tasks'],
-          queryFn: async () => {
-            const result = await axiousSecure.get(`/todo/${_id}`)
-            // return result.data;
-            if (result.data.deletedCount > 0) {
+          const cancelParcel = await axiousSecure.patch(`/todo/${_id}`)
+          if (cancelParcel.data.modifiedCount > 0) {
               Swal.fire({
-                title: "Deleted!",
-                text: "Your task has been deleted.",
-                icon: "success"
+                  title: "Success!",
+                  text: "Your ptask deleted.",
+                  icon: "success"
               });
-              refetch();
-            }
-            return result.data;
-          }
-        })
-        console.log(tasks)
-      }
-    });
+              
+             
 
-  }
+          }
+      }
+  });
+}
 
 
 

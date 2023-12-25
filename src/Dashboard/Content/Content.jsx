@@ -62,14 +62,7 @@ const Content = () => {
 
     }
   }
-  //   useEffect(() => {
-  //     axiousSecure.get('/todo')
-  //         .then(res => {
-  //           setTasks(res.data)
 
-  //         })
-
-  // }, [])
   const { data: tasks = [], refetch } = useQuery({
     queryKey: ['tasks'],
     queryFn: async () => {
@@ -81,7 +74,6 @@ const Content = () => {
   return (
     <div className="container mx-auto my-8">
       <h1 className="text-3xl font-bold mb-4">Task Management Dashboard</h1>
-      {/* You can open the modal using document.getElementById('ID').showModal() method */}
     <div className='text-center'>
     <button className="btn bg-[#2a92fa] text-[#ffffff] my-10" onClick={() => document.getElementById('my_modal_3').showModal()}>Create Task</button>
     </div>

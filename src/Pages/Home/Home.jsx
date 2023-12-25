@@ -1,9 +1,10 @@
 import { FaCheckDouble } from "react-icons/fa";
 import banner from "../../assets/images/banner.png"
+import 'aos/dist/aos.css';
 const Home = () => {
     return (
         <div className="hero min-h-screen bg-base-100">
-        <div className="hero-content flex-col lg:flex-row-reverse text-center">
+        <div className="hero-content flex-col lg:flex-row-reverse text-center" data-aos="fade-up">
           <img src={banner} className="max-w-sm" />
           <div>
             <h1 className="text-4xl text-[#2a92fa] font-bold">Unified Task Management</h1>
