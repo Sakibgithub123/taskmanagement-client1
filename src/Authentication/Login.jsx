@@ -6,6 +6,8 @@ import { AuthContext } from "../Provider/AuthProvider";
 import axios from "axios";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Login = () => {
@@ -44,11 +46,16 @@ const Login = () => {
                 axios.post('http://localhost:5000/users', userInfo)
                     .then(res => {
                         console.log(res.data)
-                        Swal.fire({
-                            title: "Good job!",
-                            text: "Login success!",
-                            icon: "success"
-                        });
+                        toast("Login Success!", {
+                            position: "top-right",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "dark",
+                          })
                         navigate(from, { replace: true });
                         // navigate('/dashboard');
                     })
@@ -62,6 +69,7 @@ const Login = () => {
 
     return (
         <div>
+            <ToastContainer />
             <div className="hero-content flex-col lg:flex-row-reverse gap-10">
                 <div className="card lg:w-1/3 shadow-2xl bg-base-100">
                     <h3 className="text-2xl font-bold text-center mb-4">Login</h3>

@@ -35,7 +35,7 @@ const ContentList = ({ title, tasks, addTask }) => {
           if (cancelParcel.data.modifiedCount > 0) {
               Swal.fire({
                   title: "Success!",
-                  text: "Your ptask deleted.",
+                  text: "Your task deleted.",
                   icon: "success"
               });
               

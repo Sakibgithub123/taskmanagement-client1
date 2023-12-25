@@ -7,16 +7,13 @@ import Swal from 'sweetalert2'
 import useAxiousSecure from '../../hook/useAxiousSecure';
 import { useQuery } from '@tanstack/react-query';
 import { AuthContext } from '../../Provider/AuthProvider';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Content = () => {
   const axiousSecure = useAxiousSecure()
-  const {user}=useContext(AuthContext)
-  // const [tasks, setTasks] = useState([
-  //   // { id: 'task-1', content: 'Task 1', list: 'todo' },
-  //   // { id: 'task-2', content: 'Task 2', list: 'todo' },
-  //   // { id: 'task-3', content: 'Task 3', list: 'ongoing' },
-  //   // { id: 'task-4', content: 'Task 4', list: 'completed' },
-  // ]);
+  const { user } = useContext(AuthContext)
+
 
   const onDragEnd = (result) => {
     if (!result.destination) return;
@@ -53,11 +50,16 @@ const Content = () => {
 
     const bookParcel = await axiousSecure.post('/todo', newTask)
     if (bookParcel.data.insertedId) {
-      Swal.fire({
-        title: "Success!",
-        text: "Task added!",
-        icon: "success"
-      });
+      toast("Task added!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      })
       refetch();
 
     }
@@ -74,9 +76,10 @@ const Content = () => {
   return (
     <div className="container mx-auto my-8">
       <h1 className="text-3xl font-bold mb-4">Task Management Dashboard</h1>
-    <div className='text-center'>
-    <button className="btn bg-[#2a92fa] text-[#ffffff] my-10" onClick={() => document.getElementById('my_modal_3').showModal()}>Create Task</button>
-    </div>
+      <ToastContainer />
+      <div className='text-center'>
+        <button className="btn bg-[#2a92fa] text-[#ffffff] my-10" onClick={() => document.getElementById('my_modal_3').showModal()}>Create Task</button>
+      </div>
       <dialog id="my_modal_3" className="modal">
         <div className="modal-box">
           <form method="dialog">
